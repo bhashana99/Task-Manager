@@ -5,25 +5,33 @@ import { ReactiveFormsModule, FormGroup, FormBuilder, Validators } from '@angula
 
 @Component({
   selector: 'app-task-form',
-  imports: [CommonModule,ReactiveFormsModule],
+  imports: [CommonModule, ReactiveFormsModule],
   templateUrl: './task-form.component.html',
   styleUrl: './task-form.component.css',
 })
 export class TaskFormComponent {
 
-  taskForm : FormGroup;
+  taskForm: FormGroup;
 
- constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder) {
     this.taskForm = this.fb.group({
-      title: [''],
-      description: ['']  
+      title: ['', [Validators.required, Validators.minLength(3)]],
+      description: ['', [Validators.required, Validators.minLength(5)]]
     });
   }
 
+  get title() {
+    return this.taskForm.get('title');
+  }
 
-  onSubmit(){
+  get description() {
+    return this.taskForm.get('description');
+  }
+
+  
+  onSubmit() {
     if (this.taskForm.valid) {
-    console.log(this.taskForm.value);
+      console.log(this.taskForm.value);
     }
   }
 }

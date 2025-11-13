@@ -1,17 +1,29 @@
-<form class="space-y-4 p-4 bg-white rounded-lg shadow border border-gray-200">
+<form [formGroup]="taskForm" (ngSubmit)="onSubmit()"
+    class="space-y-4 p-4 bg-white rounded-lg shadow border border-gray-200">
     <h2 class="text-lg font-semibold text-gray-700">Add a New Task</h2>
 
     <div>
         <label class="block text-gray-600 mb-1">Title <span class="text-red-500">*</span></label>
-        <input type="text" placeholder="Enter task title"
+        <input type="text" formControlName="title"
             class="w-full p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
             required />
+
+        <div *ngIf="title?.invalid && (title?.dirty || title?.touched)" class="text-red-500 text-sm mt-1">
+            <span *ngIf="title?.errors?.['required']">Title is required.</span>
+            <span *ngIf="title?.errors?.['minlength']">Title must be at least 3 characters long.</span>
+        </div>
     </div>
 
     <div>
-        <label class="block text-gray-600 mb-1">Description</label>
-        <textarea placeholder="Enter task description"
+        <label class="block text-gray-600 mb-1">Description<span class="text-red-500">*</span></label>
+        <textarea formControlName="description"
             class="w-full p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"></textarea>
+
+        <div *ngIf="description?.invalid && (description?.dirty || description?.touched)"
+            class="text-red-500 text-sm mt-1">
+            <span *ngIf="description?.errors?.['required']">Description is required.</span>
+            <span *ngIf="description?.errors?.['minlength']">Description must be at least 5 characters long.</span>
+        </div>
     </div>
 
 
