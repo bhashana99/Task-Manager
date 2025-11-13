@@ -22,7 +22,7 @@ export class TaskService {
 
   createTask(task : Task){
     task.id = new Date().getTime();
-    this.tasks.update(oldValues => [...oldValues,task]);
+    this.tasks.update(oldValues => [task,...oldValues]);
     this.saveToLocalStorage();
   }
 
