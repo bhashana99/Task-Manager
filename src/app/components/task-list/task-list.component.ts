@@ -16,4 +16,8 @@ export class TaskListComponent {
 
   tasks = computed(() => this.taskService.tasks());
 
+  onDelete(id : number){
+    this.taskService.deleteTask(id);
+  }
+
 }
