@@ -1,34 +1,55 @@
-
-
-
-  <div *ngIf="tasks().length === 0" class="text-gray-500 text-center">
+<div *ngIf="tasks().length === 0" class="text-gray-500 text-center">
     No tasks available.
-  </div>
+</div>
 
-  <ul *ngIf="tasks().length > 0" class="space-y-3">
-    <li
-      *ngFor="let task of tasks()"
-      class="flex justify-between items-center border border-gray-300 p-3 rounded"
-    >
-      <div>
-        <h3 class="font-semibold text-gray-800">{{ task.title }}</h3>
-        <p class="text-gray-600 text-sm">{{ task.description }}</p>
-      </div>
-      <div class="flex gap-2">
-      <button
-        
-        class="bg-yellow-500 text-white px-3 py-1 rounded hover:bg-yellow-600"
-      >
-        Edit
-      </button>
+<ul *ngIf="tasks().length > 0" class="space-y-3">
+    <li *ngFor="let task of tasks()" class="flex justify-between items-center border border-gray-300 p-3 rounded">
+        <div>
+            <h3 class="font-semibold text-gray-800">{{ task.title }}</h3>
+            <p class="text-gray-600 text-sm">{{ task.description }}</p>
+            <p class="text-xs text-gray-500">Created: {{ task.createdAt | date:'short' }}</p>
 
-      <button
-        (click)="onDelete(task.id)" 
-        class="bg-red-600 text-white px-3 py-1 rounded hover:bg-red-700"
-      >
-        Delete
-      </button>
-    </div>
+        </div>
+        <div class="flex gap-2">
+            <button 
+            (click)="onEdit(task)"
+            class="bg-yellow-500 text-white px-3 py-1 rounded hover:bg-yellow-600">
+                Edit
+            </button>
+
+            <button (click)="onDelete(task.id)" class="bg-red-600 text-white px-3 py-1 rounded hover:bg-red-700">
+                Delete
+            </button>
+        </div>
     </li>
-  </ul>
+</ul>
 
+
+<div *ngIf="selectedTask()" class="fixed inset-0 bg-black bg-opacity-40 flex items-center justify-center z-50">
+    <div class="bg-white p-6 rounded-lg w-96 shadow-lg">
+        <h2 class="text-lg font-semibold mb-4">Edit Task</h2>
+        <form [formGroup]="editForm" (ngSubmit)="onSave()" class="space-y-4">
+            <div>
+                <label class="block mb-1">Title</label>
+                <input formControlName="title" class="w-full border p-2 rounded" />
+                <div *ngIf="editForm.get('title')?.invalid && (editForm.get('title')?.dirty || editForm.get('title')?.touched)"
+                    class="text-red-500 text-sm">
+                    Title is required (min 3 chars)
+                </div>
+            </div>
+            <div>
+                <label class="block mb-1">Description</label>
+                <textarea formControlName="description" class="w-full border p-2 rounded"></textarea>
+                <div *ngIf="editForm.get('description')?.invalid && (editForm.get('description')?.dirty || editForm.get('description')?.touched)"
+                    class="text-red-500 text-sm">
+                    Description is required (min 5 chars)
+                </div>
+            </div>
+            <div class="flex justify-end gap-2">
+                <button type="button" (click)="onCancel()" class="px-4 py-2 rounded border">Cancel</button>
+                <button type="submit" [disabled]="editForm.invalid"
+                    class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">Save</button>
+            </div>
+        </form>
+    </div>
+</div>

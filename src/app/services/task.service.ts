@@ -22,6 +22,7 @@ export class TaskService {
 
   createTask(task: Task) {
     task.id = new Date().getTime();
+    task.createdAt = new Date();
     this.tasks.update(oldValues => [task, ...oldValues]);
     this.saveToLocalStorage();
   }
@@ -35,4 +36,15 @@ export class TaskService {
     this.tasks.update(tasks => tasks.filter(t => t.id !== id));
     this.saveToLocalStorage();
   }
+
+  updateTask(updatedTask: Task) {
+  this.tasks.update(tasks => {
+    const updatedList = tasks.map(task =>
+      task.id === updatedTask.id ? updatedTask : task
+    );
+    this.saveToLocalStorage();
+    return updatedList;
+  });
+}
+
 }
