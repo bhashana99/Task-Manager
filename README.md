@@ -63,6 +63,6 @@ docker build -t angular-task-manager .
 ```bash
 docker run -p 80:80 angular-task-manager
 ```
-Open [http://localhost](http://localhost/)] to access the app.
+Open http://localhost:80 to access the app.
 
 
