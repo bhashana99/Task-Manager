@@ -38,13 +38,13 @@ export class TaskService {
   }
 
   updateTask(updatedTask: Task) {
-  this.tasks.update(tasks => {
-    const updatedList = tasks.map(task =>
-      task.id === updatedTask.id ? updatedTask : task
+    this.tasks.update(tasks =>
+      tasks.map(task =>
+        task.id === updatedTask.id ? updatedTask : task
+      )
     );
+
     this.saveToLocalStorage();
-    return updatedList;
-  });
-}
+  }
 
 }
