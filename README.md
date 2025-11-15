@@ -26,9 +26,43 @@ Task Manager is a **simple CRUD application** built with **Angular 20.3.11** to 
 - **Angular:** 20.3.11  
 - **Node:** 22.14.0  
 - **Package Manager:** npm 10.9.2  
-- **Styling:** Tailwind CSS / CSS  
+- **Styling:** Tailwind CSS  
 - **Storage:** LocalStorage  
 - **Containerization:** Docker + Nginx  
 - **Language:** TypeScript  
 
 ---
+
+## Getting Started
+
+### Prerequisites
+- Node.js >= 22.14.0  
+- Angular CLI 20.3.10+  
+- Docker (optional, for production build)  
+
+---
+
+### Install Dependencies
+```bash
+npm install
+```
+
+## Run Development Server
+```bash
+ng serve
+```
+
+### Docker (Production Build)
+
+## Build Docker Image
+```bash
+docker build -t angular-task-manager .
+```
+
+## Run Docker Container
+```bash
+docker run -p 80:80 angular-task-manager
+```
+Open [http://localhost](http://localhost/)] to access the app.
+
+
