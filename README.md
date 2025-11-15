@@ -35,6 +35,12 @@ Task Manager is a **simple CRUD application** built with **Angular 20.3.11** to 
 
 ## Getting Started
 
+### Clone the Repository
+```bash
+git clone https://github.com/bhashana99/Task-Manager
+cd Task-Manager
+```
+
 ### Prerequisites
 - Node.js >= 22.14.0  
 - Angular CLI 20.3.10+  
